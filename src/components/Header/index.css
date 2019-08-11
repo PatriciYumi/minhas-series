@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin&display=swap");
+
+.main-header {
+  height: 48px;
+  background: #013041;
+  color: #f48504;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  -webkit-box-shadow: 0px 5px 11px -5px #000000;
+  box-shadow: 0px 5px 11px -5px #000000;
+}
+
+.main-header h3 {
+  font-family: "Cabin", sans-serif;
+  font-size: 24px;
+  padding-left: 15px;
+  font-weight: 500;
+}
+
+.logo {
+  height: 48px;
+  background: #f13203;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  font-size: 36px;
+}
