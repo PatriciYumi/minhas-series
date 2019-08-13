@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// componentes
+import NovaSerie from "../NovaSerie/index";
+
 // CSS
 import "./index.css";
 import { Badge } from "reactstrap";
@@ -13,16 +16,17 @@ import { Badge } from "reactstrap";
 import { MdAddCircle, MdEdit, MdClear } from "react-icons/md";
 
 const Series = () => {
-  // Variáveis
+  // hooks
   const [data, setData] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
-  // Funções
   useEffect(() => {
     axios.get("/api/series").then(res => {
       setData(res.data.data);
     });
   }, []);
 
+  // função: deleta série
   const deleteSerie = id => {
     axios.delete("/api/series/" + id).then(res => {
       const filtrado = data.filter(item => item.id !== id);
@@ -30,32 +34,19 @@ const Series = () => {
     });
   };
 
-  if (data.length === 0) {
-    return (
-      <div className="container">
-        <h1>Séries</h1>
-
-        <Link to="/series/novo" className="btn btn-primary">
-          Nova Série
-        </Link>
-
-        <div className="alert alert-warning" role="alert">
-          Ainda não existem séries cadastradas!
-        </div>
-      </div>
-    );
-  }
-
+  // elementos
   return (
     <div className="container-series">
       <div className="nav">
-        <h3>Séries</h3>
+        <h4>Séries</h4>
 
-        <Link to="/series/novo" className="btn-series">
-          <MdAddCircle className="add" style={{ fontSize: "32px" }} />
+        <button type="button" onClick={() => setModalShow(true)}>
+          <MdAddCircle className="add" style={{ fontSize: "28px" }} />
           Nova Série
-        </Link>
+        </button>
       </div>
+
+      <NovaSerie show={modalShow} onHide={() => setModalShow(false)} />
 
       {data.length > 0 ? (
         <ul>
@@ -88,20 +79,33 @@ const Series = () => {
                     </Badge>
                     <Badge color="warning">Para assistir</Badge>
 
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteSerie(record.id)}
-                    >
-                      <MdClear />
-                      Deletar
-                    </button>
-                    <Link
-                      className="btn btn-warning"
-                      to={"/series/" + record.id}
-                    >
-                      <MdEdit />
-                      Editar
-                    </Link>
+                    <div className="action-buttons">
+                      <button onClick={() => deleteSerie(record.id)}>
+                        <MdClear
+                          style={{
+                            fontSize: "24px",
+                            paddingRight: "6px",
+                            fontWeight: "bold"
+                          }}
+                        />
+                        Deletar
+                      </button>
+                      <button>
+                        <Link
+                          className="link-button"
+                          to={"/series/" + record.id}
+                        >
+                          <MdEdit
+                            style={{
+                              fontSize: "24px",
+                              paddingRight: "6px",
+                              fontWeight: "bold"
+                            }}
+                          />
+                          Editar
+                        </Link>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -109,7 +113,9 @@ const Series = () => {
           ))}
         </ul>
       ) : (
-        "Vazio!"
+        <div className="empty">
+          <h6>Ainda não existem séries cadastradas! =(</h6>
+        </div>
       )}
     </div>
   );
