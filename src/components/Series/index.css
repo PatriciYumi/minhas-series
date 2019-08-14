@@ -11,27 +11,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
+  color: #0a0b0d;
   height: 56px;
   padding: 12px 110px;
   margin: 0;
 }
 
-.container-generos .nav h4 {
+.container-generos .nav h3 {
   text-align: center;
+  font-weight: 700;
 }
 
 .container-series .nav button {
   padding: 0 30px;
   text-decoration: none;
-  color: #fff;
+  color: #0a0b0d;
   font-weight: bold;
   background: none;
   border: none;
 }
 
 .container-series .nav button:hover {
-  color: #f48504;
+  color: #059cdb;
   text-decoration: none;
   transform: translateY(2px);
   transition: all 0.2s;
@@ -80,6 +81,40 @@
   justify-content: center;
   flex: 1;
   padding: 0 40px;
+}
+
+.container-series .dados-info-serie form input {
+  width: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.container-series .dados-info-serie form select {
+  width: auto;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.container-series .dados-info-serie .radio-area {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+  width: 50%;
+}
+.container-series .dados-info-serie .radio-area input {
+  padding: 0;
+  margin: 5px;
+  width: auto;
+}
+.container-series .dados-info-serie .radio-area label {
+  padding: 0;
+  margin: 0;
 }
 
 .container-series .dados-info-serie .badge {

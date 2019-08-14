@@ -9,38 +9,15 @@ import "./index.css";
 // Ícone
 import { MdWhatshot } from "react-icons/md";
 
+// Componente principal do arquivo
 const Header = () => {
+  // Elementos
   return (
     <div className="main-header">
       <div className="logo">
-        <MdWhatshot style={{ color: "#F2B500" }} />
+        <MdWhatshot style={{ color: "#059cdb" }} />
       </div>
       <h3>minhas séries</h3>
-      {/*
-      <Navbar color="light" light expand="md">
-        <div className="container">
-          <NavbarBrand tag={Link} to="/">
-            <FaFastForward />
-            Minhas Séries
-          </NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={open} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/series">
-                  Séries
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/generos">
-                  Gêneros
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </div>
-</Navbar>
-*/}
     </div>
   );
 };

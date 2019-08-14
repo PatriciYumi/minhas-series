@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-// react-strap
+// CSS
 import { Modal, Button } from "react-bootstrap";
 
-// componente
+// Componente principal do arquivo
 const NovaSerie = props => {
-  // hooks
+  // HOOKS: useState
   const [name, setName] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // função: recupera nome da série
+  // Função: habilita input
   const onChange = evt => {
     setName(evt.target.value);
   };
 
-  // função: salva série na apo
+  // Função: salva série na api
   const save = () => {
     axios
       .post("/api/series", {
@@ -24,15 +24,14 @@ const NovaSerie = props => {
       })
       .then(res => {
         setSuccess(true);
-        return <Redirect to="/series" />;
       });
   };
 
   if (success) {
-    return <Redirect to="/series" />;
+    return <Redirect to="/" />;
   }
 
-  // elementos
+  // Elementos
   return (
     <Modal
       {...props}

@@ -1,18 +1,15 @@
 import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
+// Componentes
 import Header from "./components/Header/index";
-import Generos from "./components/Generos/Generos";
-import NovoGenero from "./components/NovoGenero/index";
-import EditarGenero from "./EditarGenero";
-
 import Series from "./components/Series/index";
-import NovaSerie from "./components/NovaSerie/index";
-import InfoSerie from "./components/EditarSerie/InfoSerie";
+import Generos from "./components/Generos/Generos";
 
+// CSS
 import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+// Componente página principal
 const Home = () => {
   return (
     <div>
@@ -25,19 +22,12 @@ const Home = () => {
   );
 };
 
+// Componente principal do arquivo
 function App() {
   return (
     <div className="body">
       <Router>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/generos" exact component={Generos} />
-          <Route path="/generos/novo" exact component={NovoGenero} />
-          <Route path="/generos/:id" exact component={EditarGenero} />
-          <Route path="/series" exact component={Series} />
-          <Route path="/series/novo" exact component={NovaSerie} />
-          <Route path="/series/:id" exact component={InfoSerie} />
-        </Switch>
+        <Route path="/" exact component={Home} />
       </Router>
     </div>
   );

@@ -1,15 +1,15 @@
 .container-generos {
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: #0a0b0d;
   width: 250px;
-  background: #f13203;
+  background: #f4f2f5;
   box-sizing: border-box;
 }
 
 .container-generos .nav {
   display: flex;
-  color: #fff;
+  color: #0a0b0d;
   align-items: center;
   justify-content: space-between;
   height: 56px;
@@ -22,14 +22,14 @@
 
 .container-generos .nav button {
   text-decoration: none;
-  color: #fff;
+  color: #0a0b0d;
   font-weight: bold;
   background: none;
   border: none;
 }
 
 .container-generos .nav button:hover {
-  color: #013041;
+  color: #059cdb;
   text-decoration: none;
   transform: translateY(2px);
   transition: all 0.2s;
@@ -40,12 +40,20 @@
   list-style: none;
 }
 
-.container-generos ul li {
+.container-generos ul li div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 38px;
   font-size: 14px;
+}
+
+.container-generos ul li div input {
+  width: 100%;
+  background: transparent;
+  color: #0a0b0d;
+  border: none;
+  border-bottom: 1px solid #0a0b0d;
 }
 
 .container-generos ul li .buttons button:first-child {
@@ -56,7 +64,11 @@
   background: none;
   border: 1px solid transparent;
   border-radius: 5px;
-  color: #fff;
+  color: #0a0b0d;
   width: 30px;
   height: 30px;
+}
+
+.container-generos ul li .buttons button:hover {
+  color: #059cdb;
 }

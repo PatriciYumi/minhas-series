@@ -2,8 +2,8 @@
 
 .main-header {
   height: 48px;
-  background: #013041;
-  color: #f48504;
+  background: #0a0b0d;
+  color: #059cdb;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -20,7 +20,7 @@
 
 .logo {
   height: 48px;
-  background: #f13203;
+  background: #f4f2f5;
   padding: 0 20px;
   display: flex;
   align-items: center;

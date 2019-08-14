@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-// componentes
+// Componentes
 import NovoGenero from "../NovoGenero/index";
 
-// css
+// CSS
 import "./index.css";
 
-// Ícon
-import { MdAddCircle, MdEdit, MdClear } from "react-icons/md";
+// Ícones
+import {
+  MdAddCircle,
+  MdEdit,
+  MdClear,
+  MdCheck,
+  MdDelete
+} from "react-icons/md";
 
+// Componente principal do arquivo
 const Generos = () => {
+  // HOOKS: useState
   const [data, setData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [meuId, setMeuId] = useState("");
+  const [name, setName] = useState("");
 
+  // HOOK: useEffect
   useEffect(() => {
     axios.get("/api/genres").then(res => {
       setData(res.data.data);
     });
-  }, []);
+  }, [name, data]);
 
+  // Função: deleta um gênero
   const deleteGenero = id => {
     axios.delete("/api/genres/" + id).then(res => {
       const filtrado = data.filter(item => item.id !== id);
@@ -28,6 +40,36 @@ const Generos = () => {
     });
   };
 
+  // Função: habilita o modo de edição
+  const verificaEdicao = id => {
+    setEdit(true);
+    setMeuId(id);
+
+    // Recupera os dados do gênero selecionado
+    axios.get("/api/genres/" + id).then(res => {
+      setName(res.data.name);
+    });
+  };
+
+  // Função: habilita input para editar o gênero
+  const onChange = evt => {
+    setName(evt.target.value);
+  };
+
+  // Função: salva as alterações feitas pelo usuário
+  const save = id => {
+    axios
+      .put("/api/genres/" + id, {
+        name
+      })
+      .then(res => {
+        // Fecha o modo de edição
+        setEdit(false);
+        setData(data);
+      });
+  };
+
+  // Elementos
   return (
     <div className="container-generos">
       <div className="nav">
@@ -45,25 +87,49 @@ const Generos = () => {
         <ul>
           {data.map(record => (
             <li key={record.id}>
-              {record.name}
-              <div className="buttons">
-                <button title="Editar" type="button">
-                  <MdEdit />
-                </button>
-                <button
-                  title="Deletar"
-                  type="button"
-                  onClick={() => deleteGenero(record.id)}
-                >
-                  <MdClear />
-                </button>
+              {meuId === record.id && edit ? (
+                <div>
+                  <input type="text" value={name} onChange={onChange} />
+                  <div className="buttons">
+                    <button
+                      title="Salvar"
+                      type="button"
+                      onClick={() => save(record.id)}
+                    >
+                      <MdCheck />
+                    </button>
 
-                {/*
-                <Link className="btn btn-warning" to={"/generos/" + record.id}>
-                  <MdEdit />
-                  Editar
-                </Link>*/}
-              </div>
+                    <button
+                      title="Cancelar"
+                      type="button"
+                      onClick={() => setEdit(false)}
+                    >
+                      <MdClear />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p>{record.name}</p>
+                  <div className="buttons">
+                    <button
+                      title="Editar"
+                      type="button"
+                      onClick={() => verificaEdicao(record.id)}
+                    >
+                      <MdEdit />
+                    </button>
+
+                    <button
+                      title="Excluir"
+                      type="button"
+                      onClick={() => deleteGenero(record.id)}
+                    >
+                      <MdDelete />
+                    </button>
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
